@@ -1,27 +1,40 @@
-// script.js
+// ----- [Supabase 연동 정보 입력] -----
+const SUPABASE_URL = 'https://xxxxxxxx.supabase.co'; // 프로젝트별로 변경
+const SUPABASE_KEY = 'eyJ...'; // anon public key 복사(위 설명 참고)
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// ----- [퀴즈 문제 데이터 샘플] -----
 const quizData = [
   {
     id: 1,
     question: "우리 회사는 목표설정을 할 때, 후제안 진행률, 고객만족도 점수와 같은 고객관련 지표도 포함하여 수립해요.",
     correctAnswer: "O",
-    explanation: "중장기 파트너십 기반으로 고객의 성공과 성장을 함께 하는 마케팅 크리에이티브 리딩 파트너라는 고객가치지향점을 설정하고, 2024년부터 조직의 \"사업목표\"(재무목표 및 조직별 성과지표)를 \"수립할 때, 고객가치 지향점 달성\"을 고려하고 있습니다. 이 방향은 모든 경영진뿐만 아니라 고객을 직접 응대하는 구성원에게도 적용되어, 전사 대부분 구성원의 성과지표 및 주요 과제에 고객가치혁신 목표가 연계되어 있습니다."
+    explanation: "중장기 파트너십 기반 등 상세 내용..."
   },
   {
     id: 2,
-    question: "우리 회사는 고객만족도와 더불어 HSAD 추천지수(NPS), 경쟁사 이용 경험에 대한 평가 등 다양한 유형의 고객평가지표를 지속적으로 모니터링하고 관리해요.",
+    question: "우리 회사는 고객만족도와 더불어 다양한 유형의 고객평가지표를 지속적으로 관리해요.",
     correctAnswer: "O",
-    explanation: "2023년 고객만족도 조사를 도입하여, 매년 고객만족도, HSAD 추천의향(NPS), 경쟁지표 등을 정기적으로 파악하고 성과지표로 관리하고 있습니다. 이러한 평가지표는 경영진뿐 아니라, 고객을 직접 응대하는 구성원의 평가에도 반영되며, 고객에게 큰 감동과 만족을 선사한 프로젝트는 Dash Day를 통해 포상하고 있습니다."
+    explanation: "2023년 고객만족도 조사를 도입하여..."
   },
   {
     id: 3,
-    question: "우리 회사는 프로젝트가 종료되면, 리플렉션 메모(RM)를 작성하고 후제안을 하는 것처럼 고객가치 중심으로 일하는 방식을 업무프로세스로 체계화하고, 조직문화로도 자리잡아 가고 있어요.",
+    question: "우리 회사는 프로젝트가 종료되면, 리플렉션 메모(RM)를 작성하고 후제안을 하는 것처럼 고객가치 중심으로 일하는 방식을 업무프로세스로 체계화하고 있어요.",
     correctAnswer: "O",
-    explanation: "우리의 일은 고객 Pain Point에서 시작해 고객감동으로 마무리 됩니다. 프로젝트의 중심에는 언제나 고객이 있으며, 모든 의사결정은 고객의 니즈, 고객의 소리(VoC)와 같은 고객 정보에 기반하여 이루어집니다. 고객중심 일하는 방식은 우리가 늘 실천해오던 것으로 우리 몸과 조직에 자연스럽게 배여 있습니다."
+    explanation: "우리의 일은 고객 Pain Point에서..."
   }
 ];
 
-// 상태 관리 객체
+const group2Options = {
+  "BX부문": ["BX1", "BX2", "BX3", "BX4", "BX5", "CR담당", "엘베스트사업부", "Integrated Experience Center", "BX직속"],
+  "CX부문": ["O2O마케팅사업부", "오디언스전략센터", "커머스AX사업1실", "커머스AX사업2실", "AX컨텐츠사업실", "컨텐츠마케팅사업실", "CX직속"],
+  "LGCC": [],
+  "CFO": [],
+  "CHO": [],
+  "CSO": [],
+  "CEO직속": []
+};
+
 let state = {
   current: 0,
   score: 0,
@@ -35,7 +48,8 @@ const $$ = sel => document.querySelectorAll(sel);
 const pages = {
   title: $('#title-page'),
   quiz: $('#quiz-page'),
-  result: $('#result-page')
+  result: $('#result-page'),
+  info: $('#user-info-page')
 };
 
 function showPage(page) {
@@ -43,7 +57,7 @@ function showPage(page) {
   pages[page].style.display = 'flex';
 }
 
-// 타이틀 → 첫 문제 시작
+// ---- 타이틀 → 첫 문제 시작 ----
 $('#start-btn').onclick = () => {
   state = { current: 0, score: 0, userAnswers: [], finished: false };
   renderQuiz();
@@ -51,7 +65,6 @@ $('#start-btn').onclick = () => {
   startTimer();
 };
 
-// 퀴즈 화면 렌더
 function renderQuiz() {
   const q = quizData[state.current];
   $('#question-number').innerText = `${state.current + 1}/${quizData.length}`;
@@ -65,7 +78,6 @@ function renderQuiz() {
   resetTimer();
 }
 
-// O/X 버튼 클릭 이벤트
 $$('.ox-btn').forEach(btn => {
   btn.onclick = function() {
     handleAnswer(btn.dataset.answer, btn);
@@ -89,66 +101,120 @@ function handleAnswer(userAns, btnEl) {
   stopTimer();
 }
 
-// 다음 문제 버튼
 $('#next-btn').onclick = () => {
   state.current++;
   if (state.current < quizData.length) {
     renderQuiz();
     startTimer();
   } else {
+    state.finished = true;
     showResult();
     showPage('result');
   }
 };
 
-// 결과 페이지
 function showResult() {
   $('#score-summary').innerText = `총 점수: ${state.score}/${quizData.length}`;
-  let trs = '<tr><th>문항</th><th>내 답</th><th>정답</th><th>결과</th></tr>';
-  quizData.forEach((q, i) => {
-    const ua = state.userAnswers[i] || '-';
-    const ok = ua === q.correctAnswer;
-    trs += `<tr>
-      <td>${i + 1}</td>
-      <td>${ua}</td>
-      <td>${q.correctAnswer}</td>
-      <td>${ok ? 'O' : 'X'}</td>
-    </tr>`;
-  });
-  $('#result-table').innerHTML = trs;
-  // 사례 입력 영역, 완료멘트 숨김
-  $('#share-area').style.display = 'none';
-  $('#share-success').style.display = 'none';
-  $('#share-input').value = '';
+  const percent = (state.score / quizData.length) * 100;
+  let msg;
+  if (percent >= 80) {
+    msg = "👏 잘했습니다! 고객가치에 대해 훌륭하게 이해하고 계시네요.";
+    $('#score-msg').style.color = "#27ae60";
+  } else {
+    msg = "😊 조금만 더! 고객가치 혁신을 위한 추가학습을 추천합니다.";
+    $('#score-msg').style.color = "#dc3545";
+  }
+  $('#score-msg').innerText = msg;
 }
 
-// "다시 풀기" => 타이틀 복귀
-$('#retry-btn').onclick = () => {
-  showPage('title');
+// 결과→ 응답자 입력폼 페이지 이동
+$('#to-submit-info-btn').onclick = () => {
+  showPage('info');
+  resetInfoForm();
 };
 
-// ===============================
-// 사례 공유 기능
-$('#share-btn').onclick = () => {
-  $('#share-area').style.display = 'flex';
-  $('#share-success').style.display = 'none';
-  $('#share-input').focus();
-};
+$('#retry-btn').onclick = () => { showPage('title'); };
 
-// 주관식 제출
-$('#submit-share-btn').onclick = () => {
-  const txt = $('#share-input').value.trim();
-  if(!txt) {
-    alert('사례 내용을 입력해주세요!');
-    $('#share-input').focus();
-    return;
+// ---- 응답자 정보 & 실행사례 제출 ----
+
+function resetInfoForm() {
+  $('#info-form').reset();
+  $('#group2').innerHTML = `<option value="">먼저 부문을 선택하세요</option>`;
+  $('#submit-success').style.display = 'none';
+}
+
+// 부문=>사업부 연동
+$('#group1').addEventListener('change', function() {
+  const v = this.value;
+  const options = group2Options[v] || [];
+  const group2 = $('#group2');
+  group2.innerHTML = '';
+  if(options.length) {
+    group2.disabled = false;
+    group2.required = true;
+    for(const op of options) {
+      const optEl = document.createElement('option');
+      optEl.value = op;
+      optEl.innerText = op;
+      group2.appendChild(optEl);
+    }
+    group2.insertAdjacentHTML('afterbegin', `<option value="">사업부 선택</option>`);
+  } else {
+    group2.disabled = true;
+    group2.required = false;
+    group2.innerHTML = `<option value="">선택없음</option>`;
   }
-  $('#share-success').style.display = 'block';
-  $('#share-input').value = '';
-};
-// ===============================
+});
 
-// 타이머 (15초)
+// 제출 처리
+$('#info-form').onsubmit = async function(e){
+  e.preventDefault();
+  // 유효성 검증
+  const group1 = $('#group1').value;
+  const group2 = $('#group2').disabled ? '' : $('#group2').value;
+  const username = $('#username').value.trim();
+  const number = $('#number').value.trim();
+  const subjective = $('#subjective').value.trim();
+
+  if(group1 === "") { alert("부문을 선택해 주세요!"); return; }
+  if(!$('#group2').disabled && group2 === "") { alert("사업부를 선택해 주세요!"); return; }
+  if(!username) { alert("이름을 입력해 주세요!"); return; }
+  if(!/^[0-9]{10,11}$/.test(number)) { alert("전화번호를 올바르게 입력해 주세요! (예: 01012345678)"); return; }
+  if(!subjective) { alert("고객가치 실행사례를 입력해 주세요!"); return; }
+
+  // 데이터 insert
+  $('#submit-info-btn').disabled = true;
+  $('#submit-info-btn').innerText = "제출 중…";
+
+  try {
+    const { data, error } = await supabase.from('quiz_result').insert([
+      {
+        group1, 
+        group2,
+        username,
+        number,
+        score: state.score,
+        subjective
+      }
+    ]);
+    if (error) {
+      alert('데이터 저장 오류: ' + error.message);
+      $('#submit-info-btn').disabled = false;
+      $('#submit-info-btn').innerText = "제출";
+      return;
+    }
+    $('#submit-success').style.display = 'block';
+    $('#submit-info-btn').style.display = 'none';
+  } catch(e) {
+    alert("서버 오류! 다시 시도해 주세요.");
+    $('#submit-info-btn').disabled = false;
+    $('#submit-info-btn').innerText = "제출";
+  }
+};
+
+showPage('title');
+
+// ---- 타이머 ----
 let timer = null, timeTotal = 15, timeLeft = 15;
 function startTimer() {
   timeLeft = timeTotal;
@@ -172,6 +238,3 @@ function resetTimer(){
 function updateTimerBar() {
   $('#timer-bar').style.width = `${(timeLeft / timeTotal) * 100}%`;
 }
-
-// 최초 진입 시 타이틀
-showPage('title');
