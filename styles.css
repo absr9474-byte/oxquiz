@@ -6,7 +6,6 @@
   --timer-bg: #E9ECEF;
   font-size: 18px;
 }
-/* 🟡 전체 화면 박스 폭 2배 확장 (840px) */
 section {
   max-width: 840px;
   margin: 0 auto;
@@ -21,13 +20,11 @@ section {
   min-height: 80vh;
   text-align: center;
 }
-
 #title-page h1, #title-page p {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
-
 .status-bar {
   width: 100%;
   display: flex;
@@ -55,7 +52,6 @@ section {
   margin: 2em 0 1em 0;
   text-align: center;
 }
-
 .ox-btns {
   display: flex;
   width: 100%;
@@ -87,8 +83,6 @@ section {
   font-weight: bold;
   border: 2px solid #007BFF;
 }
-
-/* 🟡 피드백(설명) 폰트 0.7배 축소 */
 #answer-feedback {
   display: flex;
   flex-direction: column;
@@ -97,7 +91,7 @@ section {
   padding: 1em 1em;
   border-radius: 14px;
   min-height: 75px;
-  font-size: 0.7em;   /* 여기만 축소! */
+  font-size: 0.7em;
 }
 .feedback-correct {
   background: var(--color-correct);
@@ -109,7 +103,6 @@ section {
   color: #b32131;
   border: 1.5px solid #e5989d;
 }
-
 button {
   background: #007BFF;
   color: #fff;
@@ -133,12 +126,9 @@ button:active, button:hover { background: #005bcc; }
   text-align: center;
   font-weight: bold;
 }
-
 #score-msg {
   color: #27ae60;
 }
-
-/* 응답자 정보 폼 */
 #info-form {
   width: 90%;
   max-width: 600px;
@@ -167,19 +157,13 @@ button:active, button:hover { background: #005bcc; }
   min-height: 80px;
   resize: vertical;
 }
-
 #submit-success {
   color: #257857;
   font-weight: bold;
   margin-top: 1.2em;
 }
-
-/* 반응형 */
 @media (max-width: 900px) {
-  section {
-    max-width: 99vw;
-    padding: 1.1em 2vw;
-  }
+  section { max-width: 99vw; padding: 1.1em 2vw; }
   #info-form, #info-form input, #info-form textarea, #info-form select { max-width: 98vw;}
 }
 @media (max-width: 480px) {
