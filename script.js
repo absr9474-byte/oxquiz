@@ -1,6 +1,6 @@
 // ----- [Supabase 연동 정보 입력] -----
-const SUPABASE_URL = 'https://xxxxxxxx.supabase.co'; // 프로젝트별로 변경
-const SUPABASE_KEY = 'eyJ...'; // anon public key 복사(위 설명 참고)
+const SUPABASE_URL = 'https://vqaggjpxalwqrcmdsrbl.supabase.co'; // 프로젝트별로 변경
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZxYWdnanB4YWx3cXJjbWRzcmJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNzgxOTEsImV4cCI6MjA5MDc1NDE5MX0.0ocsPrLn3MHiESSd94kZKvFx2eSYbUCQadCbPqlHEzk'; // anon public key 복사(위 설명 참고)
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ----- [퀴즈 문제 데이터 샘플] -----
