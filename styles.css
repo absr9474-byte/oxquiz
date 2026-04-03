@@ -1,0 +1,244 @@
+:root {
+  --color-o: #007BFF;
+  --color-x: #DC3545;
+  --color-correct: #D4EDDA;
+  --color-wrong: #F8D7DA;
+  --timer-bg: #E9ECEF;
+  font-size: 18px;
+}
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', Arial, sans-serif;
+  background: #FAFAFA;
+  color: #222;
+  word-break: keep-all;
+  line-height: 1.6;
+}
+section {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 2.5em 1em;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 14px 4px #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   /* 세로/가로 정중앙 정렬 추가 */
+  min-height: 80vh;
+  text-align: center;        /* 모든 텍스트 중앙정렬 */
+}
+#title-page h1, #title-page p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 상태바, 타이머 */
+.status-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.timer-wrap {
+  flex: 1;
+  background: var(--timer-bg);
+  border-radius: 14px;
+  height: 16px;
+  margin-left: 1em;
+  overflow: hidden;
+  position: relative;
+}
+.timer-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #82cca3, #b1e6b2);
+  transition: width 0.2s;
+}
+
+/* 문제 텍스트 */
+#question-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 2em 0 1em 0;
+  text-align: center;
+}
+
+/* O/X 둥근 사각형 버튼 */
+.ox-btns {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin: 1.7em 0 2em 0;
+}
+.ox-btn {
+  width: 92px;
+  height: 68px;
+  border-radius: 20px; /* 🟩 둥근 사각형 */
+  border: none;
+  font-size: 2.2em;
+  color: #fff;
+  background: #aaa;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 10px #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.o-btn {
+  background: var(--color-o);
+}
+.x-btn {
+  background: var(--color-x);
+}
+.ox-btn:active,
+.ox-btn:hover {
+  transform: scale(1.07);
+}
+
+/* 선택시 강조 */
+.ox-btn.selected {
+  outline: 3px solid #3332;
+  background: linear-gradient(90deg, #ebf2ff, #ace3ff 60%);
+  color: #007BFF;
+  font-weight: bold;
+  border: 2px solid #007BFF;
+}
+
+/* 정오 피드백 */
+#answer-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em 0;
+  padding: 1em 1em;
+  border-radius: 14px;
+  min-height: 75px;
+  font-size: 1.1em;
+}
+.feedback-correct {
+  background: var(--color-correct);
+  color: #257857;
+  border: 1.5px solid #94c9a6;
+}
+.feedback-wrong {
+  background: var(--color-wrong);
+  color: #b32131;
+  border: 1.5px solid #e5989d;
+}
+
+/* 기본 버튼 */
+button {
+  background: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 1em 2.3em;
+  font-size: 1.08em;
+  margin: 1.3em 0 0 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.15s;
+}
+button:active,
+button:hover {
+  background: #005bcc;
+}
+#next-btn,
+#retry-btn,
+#share-btn,
+#submit-share-btn {
+  margin-top: 1.4em;
+  font-size: 1.1em;
+}
+
+#score-summary {
+  font-size: 1.2em;
+  margin: 1em 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* 결과 테이블 */
+#result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0 1em 0;
+  font-size: 1em;
+  background: #f0f8ff;
+}
+#result-table th,
+#result-table td {
+  border-bottom: 1px solid #c9e3ff;
+  padding: 0.7em 0.3em;
+  text-align: center;
+  word-break: keep-all;
+}
+#result-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 사례 공유 버튼 및 폼 */
+#share-btn {
+  background: #27ae60;
+  font-size: 1.1em;
+  margin-top: 1.7em;
+  margin-bottom: 1.1em;
+  padding: 1em 1.7em;
+}
+#share-btn:active,
+#share-btn:hover {
+  background: #148d47;
+}
+
+#share-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.1em;
+}
+#share-area textarea {
+  width: 93%;
+  font-size: 1em;
+  font-family: 'Noto Sans KR', sans-serif;
+  padding: 0.7em;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  resize: vertical;
+  margin-bottom: 0.7em;
+}
+#share-area button {
+  background: #007BFF;
+  width: 80px;
+  font-size: 1em;
+  padding: 0.9em 0;
+}
+#share-success {
+  color: #257857;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+/* 반응형(모바일) */
+@media (max-width: 480px) {
+  section {
+    max-width: 99vw;
+    padding: 1.1em 2vw;
+  }
+  .ox-btn {
+    width: 36vw;
+    max-width: 128px;
+    height: 46px;
+    font-size: 1.18em;
+  }
+  #question-text {
+    font-size: 1em;
+  }
+  #share-area textarea {
+    width: 98%;
+    font-size: 0.98em;
+  }
+}
