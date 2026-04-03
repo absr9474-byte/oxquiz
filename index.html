@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>고객가치혁신 OX퀴즈</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Supabase JS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"></script>
 </head>
 <body>
   <!-- 🟦 타이틀(시작) 페이지 -->
   <section id="title-page">
     <h1>우리 회사 고객가치혁신<br>OX퀴즈</h1>
-    <p>고객가치혁신에 대해 바르게 알아보는 OX퀴즈! <br>모두 풀고 나면 결과를 확인할 수 있습니다.</p>
+    <p>고객가치혁신에 대해 바르게 알아보는 OX퀴즈! <br>모두 풀고 나면 결과를 확인하고 경험 사례도 자랑할 수 있습니다.</p>
     <button id="start-btn">시작하기</button>
   </section>
 
@@ -31,24 +33,58 @@
     <button id="next-btn" style="display:none;">다음 문제</button>
   </section>
 
-  <!-- 🟦 결과 페이지 -->
+  <!-- 🟦 결과 요약 페이지 -->
   <section id="result-page" style="display:none;">
     <h2>결과 요약</h2>
     <div id="score-summary"></div>
-
-    <!-- 요구사항 4: 사례 자랑 버튼과 창 -->
-    <button id="share-btn" style="margin:1em 0 2em 0;">동료 고객가치 실행 사례 자랑하기</button>
-
-    <!-- 사례 입력 폼 영역 (클릭 시 표시) -->
-    <div id="share-area" style="display:none; flex-direction:column; align-items:center;">
-      <p style="font-weight:bold; margin-top:0;">동료의 고객가치 실행 사례를 자랑해주세요!</p>
-      <textarea id="share-input" rows="5" placeholder="여기에 내용을 입력하세요" style="width:93%; resize:vertical; border-radius:8px; border:1px solid #ddd; font-size:1em; padding:0.7em; margin-bottom:0.7em;"></textarea>
-      <button id="submit-share-btn">제출</button>
-      <div id="share-success" style="display:none; color:#257857; font-weight:bold; margin-top:1em;">제출이 완료되었습니다! 감사합니다 👍</div>
-    </div>
-
-    <table id="result-table"></table>
+    <div id="score-msg" style="margin:1.2em 0 2em 0; font-size:1.22em; font-weight:600;"></div>
+    <button id="to-submit-info-btn">응답자 정보 및 실행사례 제출</button>
     <button id="retry-btn" style="margin-top:1.7em;">🔄 다시 풀기</button>
+  </section>
+
+  <!-- 🟦 응답자 정보/고객가치 실행사례 제출 페이지 -->
+  <section id="user-info-page" style="display:none;">
+    <h2>응답자 정보 및 고객가치 실행사례 제출</h2>
+    <form id="info-form">
+      <label>
+        부문 선택<br>
+        <select id="group1" required>
+          <option value="">부문을 선택하세요</option>
+          <option value="BX부문">BX부문</option>
+          <option value="CX부문">CX부문</option>
+          <option value="LGCC">LGCC</option>
+          <option value="CFO">CFO</option>
+          <option value="CHO">CHO</option>
+          <option value="CSO">CSO</option>
+          <option value="CEO직속">CEO직속</option>
+        </select>
+      </label>
+      <br><br>
+      <label>
+        사업부 선택<br>
+        <select id="group2" required>
+          <option value="">먼저 부문을 선택하세요</option>
+        </select>
+      </label>
+      <br><br>
+      <label>
+        이름<br>
+        <input type="text" id="username" required placeholder="이름을 입력하세요">
+      </label>
+      <br><br>
+      <label>
+        전화번호<br>
+        <input type="tel" id="number" required pattern="^01[0-9]{8,9}$" maxlength="11" placeholder="예: 01012345678">
+      </label>
+      <br><br>
+      <label>
+        고객가치 실행사례 자랑하기<br>
+        <textarea id="subjective" rows="5" required placeholder="퀴즈를 통해 알게 된 고객가치를 실제로 잘 실천한 사례가 있나요? 동료나 본인의 경험을 구체적으로 소개해주세요."></textarea>
+      </label>
+      <br><br>
+      <button id="submit-info-btn" type="submit">제출</button>
+    </form>
+    <div id="submit-success" style="display:none; color:#257857; font-weight:bold; margin-top:1.2em;">제출이 완료되었습니다! 감사합니다 👍</div>
   </section>
 
   <script src="script.js"></script>
