@@ -1,12 +1,9 @@
-// ----- [Supabase 연동 정보 입력] -----
-const SUPABASE_URL = 'https://vqaggjpxalwqrcmdsrbl.supabase.co'; // 프로젝트별로 변경
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZxYWdnanB4YWx3cXJjbWRzcmJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNzgxOTEsImV4cCI6MjA5MDc1NDE5MX0.0ocsPrLn3MHiESSd94kZKvFx2eSYbUCQadCbPqlHEzk'; // anon public key 복사(위 설명 참고)
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+// ----- Supabase 연동 -----
+const SUPABASE_URL = 'https://vqaggjpxalwqrcmdsrbl.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZxYWdnanB4YWx3cXJjbWRzcmJsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNzgxOTEsImV4cCI6MjA5MDc1NDE5MX0.0ocsPrLn3MHiESSd94kZKvFx2eSYbUCQadCbPqlHEzk';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ----- [퀴즈 문제 데이터 샘플] -----
+// ----- 문제 데이터 -----
 const quizData = [
   {
     id: 1,
@@ -28,6 +25,7 @@ const quizData = [
   }
 ];
 
+// ----- 사업부 옵션 -----
 const group2Options = {
   "BX부문": ["BX1", "BX2", "BX3", "BX4", "BX5", "CR담당", "엘베스트사업부", "Integrated Experience Center", "BX직속"],
   "CX부문": ["O2O마케팅사업부", "오디언스전략센터", "커머스AX사업1실", "커머스AX사업2실", "AX컨텐츠사업실", "컨텐츠마케팅사업실", "CX직속"],
@@ -38,6 +36,7 @@ const group2Options = {
   "CEO직속": []
 };
 
+// ----- 상태 -----
 let state = {
   current: 0,
   score: 0,
@@ -60,7 +59,7 @@ function showPage(page) {
   pages[page].style.display = 'flex';
 }
 
-// ---- 타이틀 → 첫 문제 시작 ----
+// ----- 타이틀 → 퀴즈 시작 -----
 $('#start-btn').onclick = () => {
   state = { current: 0, score: 0, userAnswers: [], finished: false };
   renderQuiz();
@@ -130,7 +129,7 @@ function showResult() {
   $('#score-msg').innerText = msg;
 }
 
-// 결과→ 응답자 입력폼 페이지 이동
+// 결과→ 응답자 입력폼
 $('#to-submit-info-btn').onclick = () => {
   showPage('info');
   resetInfoForm();
@@ -143,10 +142,12 @@ $('#retry-btn').onclick = () => { showPage('title'); };
 function resetInfoForm() {
   $('#info-form').reset();
   $('#group2').innerHTML = `<option value="">먼저 부문을 선택하세요</option>`;
+  $('#group2').disabled = false;
   $('#submit-success').style.display = 'none';
+  $('#submit-info-btn').style.display = 'inline-block';
 }
 
-// 부문=>사업부 연동
+// 부문 => 사업부 연동
 $('#group1').addEventListener('change', function() {
   const v = this.value;
   const options = group2Options[v] || [];
@@ -170,10 +171,8 @@ $('#group1').addEventListener('change', function() {
 });
 
 // 제출 처리
-// ---- 제출 처리 ----
 $('#info-form').onsubmit = async function(e){
   e.preventDefault();
-  // 유효성 검증
   const group1 = $('#group1').value;
   const group2Elem = $('#group2');
   const group2 = group2Elem.disabled ? '' : group2Elem.value;
@@ -187,12 +186,10 @@ $('#info-form').onsubmit = async function(e){
   if(!/^[0-9]{10,11}$/.test(number)) { alert("전화번호를 올바르게 입력해 주세요! (예: 01012345678)"); return; }
   if(!subjective) { alert("고객가치 실행사례를 입력해 주세요!"); return; }
 
-  // 데이터 insert
   $('#submit-info-btn').disabled = true;
   $('#submit-info-btn').innerText = "제출 중…";
-
   try {
-    const { data, error } = await supabaseClient.from('quiz_result').insert([
+    const { data, error } = await supabase.from('quiz_result').insert([
       {
         group1, 
         group2,
