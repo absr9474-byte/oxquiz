@@ -6,16 +6,9 @@
   --timer-bg: #E9ECEF;
   font-size: 18px;
 }
-body {
-  margin: 0;
-  font-family: 'Noto Sans KR', Arial, sans-serif;
-  background: #FAFAFA;
-  color: #222;
-  word-break: keep-all;
-  line-height: 1.6;
-}
+/* 🟡 전체 화면 박스 폭 2배 확장 (840px) */
 section {
-  max-width: 420px;
+  max-width: 840px;
   margin: 0 auto;
   padding: 2.5em 1em;
   background: #fff;
@@ -24,17 +17,17 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;   /* 세로/가로 정중앙 정렬 추가 */
+  justify-content: center;
   min-height: 80vh;
-  text-align: center;        /* 모든 텍스트 중앙정렬 */
+  text-align: center;
 }
+
 #title-page h1, #title-page p {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* 상태바, 타이머 */
 .status-bar {
   width: 100%;
   display: flex;
@@ -56,16 +49,13 @@ section {
   background: linear-gradient(to right, #82cca3, #b1e6b2);
   transition: width 0.2s;
 }
-
-/* 문제 텍스트 */
 #question-text {
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: bold;
   margin: 2em 0 1em 0;
   text-align: center;
 }
 
-/* O/X 둥근 사각형 버튼 */
 .ox-btns {
   display: flex;
   width: 100%;
@@ -73,11 +63,11 @@ section {
   margin: 1.7em 0 2em 0;
 }
 .ox-btn {
-  width: 92px;
-  height: 68px;
-  border-radius: 20px; /* 🟩 둥근 사각형 */
+  width: 120px;
+  height: 80px;
+  border-radius: 20px;
   border: none;
-  font-size: 2.2em;
+  font-size: 2.4em;
   color: #fff;
   background: #aaa;
   cursor: pointer;
@@ -87,18 +77,9 @@ section {
   align-items: center;
   justify-content: center;
 }
-.o-btn {
-  background: var(--color-o);
-}
-.x-btn {
-  background: var(--color-x);
-}
-.ox-btn:active,
-.ox-btn:hover {
-  transform: scale(1.07);
-}
-
-/* 선택시 강조 */
+.o-btn { background: var(--color-o);}
+.x-btn { background: var(--color-x);}
+.ox-btn:active, .ox-btn:hover { transform: scale(1.07);}
 .ox-btn.selected {
   outline: 3px solid #3332;
   background: linear-gradient(90deg, #ebf2ff, #ace3ff 60%);
@@ -107,7 +88,7 @@ section {
   border: 2px solid #007BFF;
 }
 
-/* 정오 피드백 */
+/* 🟡 피드백(설명) 폰트 0.7배 축소 */
 #answer-feedback {
   display: flex;
   flex-direction: column;
@@ -116,7 +97,7 @@ section {
   padding: 1em 1em;
   border-radius: 14px;
   min-height: 75px;
-  font-size: 1.1em;
+  font-size: 0.7em;   /* 여기만 축소! */
 }
 .feedback-correct {
   background: var(--color-correct);
@@ -129,7 +110,6 @@ section {
   border: 1.5px solid #e5989d;
 }
 
-/* 기본 버튼 */
 button {
   background: #007BFF;
   color: #fff;
@@ -142,103 +122,67 @@ button {
   font-weight: bold;
   transition: background 0.15s;
 }
-button:active,
-button:hover {
-  background: #005bcc;
-}
-#next-btn,
-#retry-btn,
-#share-btn,
-#submit-share-btn {
+button:active, button:hover { background: #005bcc; }
+#next-btn, #retry-btn, #to-submit-info-btn, #submit-info-btn {
   margin-top: 1.4em;
   font-size: 1.1em;
 }
-
 #score-summary {
-  font-size: 1.2em;
-  margin: 1em 0;
+  font-size: 1.3em;
+  margin: 1.1em 0 0.7em 0;
   text-align: center;
   font-weight: bold;
 }
 
-/* 결과 테이블 */
-#result-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.2em 0 1em 0;
-  font-size: 1em;
-  background: #f0f8ff;
-}
-#result-table th,
-#result-table td {
-  border-bottom: 1px solid #c9e3ff;
-  padding: 0.7em 0.3em;
-  text-align: center;
-  word-break: keep-all;
-}
-#result-table tr:last-child td {
-  border-bottom: none;
+#score-msg {
+  color: #27ae60;
 }
 
-/* 사례 공유 버튼 및 폼 */
-#share-btn {
-  background: #27ae60;
-  font-size: 1.1em;
-  margin-top: 1.7em;
-  margin-bottom: 1.1em;
-  padding: 1em 1.7em;
-}
-#share-btn:active,
-#share-btn:hover {
-  background: #148d47;
-}
-
-#share-area {
-  width: 100%;
+/* 응답자 정보 폼 */
+#info-form {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 1.1em;
+  align-items: flex-start;
 }
-#share-area textarea {
-  width: 93%;
+#info-form label {
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  display: block;
+}
+#info-form input, #info-form select, #info-form textarea {
+  font-family: 'Noto Sans KR', Arial, sans-serif;
+  width: 100%;
   font-size: 1em;
-  font-family: 'Noto Sans KR', sans-serif;
-  padding: 0.7em;
   border-radius: 8px;
   border: 1px solid #ddd;
+  padding: 0.6em;
+  box-sizing: border-box;
+  margin-top: 0.3em;
+}
+#info-form textarea {
+  min-height: 80px;
   resize: vertical;
-  margin-bottom: 0.7em;
-}
-#share-area button {
-  background: #007BFF;
-  width: 80px;
-  font-size: 1em;
-  padding: 0.9em 0;
-}
-#share-success {
-  color: #257857;
-  font-weight: bold;
-  margin-top: 1em;
 }
 
-/* 반응형(모바일) */
-@media (max-width: 480px) {
+#submit-success {
+  color: #257857;
+  font-weight: bold;
+  margin-top: 1.2em;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
   section {
     max-width: 99vw;
     padding: 1.1em 2vw;
   }
-  .ox-btn {
-    width: 36vw;
-    max-width: 128px;
-    height: 46px;
-    font-size: 1.18em;
-  }
-  #question-text {
-    font-size: 1em;
-  }
-  #share-area textarea {
-    width: 98%;
-    font-size: 0.98em;
-  }
+  #info-form, #info-form input, #info-form textarea, #info-form select { max-width: 98vw;}
+}
+@media (max-width: 480px) {
+  .ox-btn { width: 34vw; max-width:110px; height: 50px; font-size: 1.25em;}
+  #question-text { font-size: 1em;}
 }
