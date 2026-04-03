@@ -1,0 +1,188 @@
+:root {
+  --color-o: #007BFF;
+  --color-x: #DC3545;
+  --color-correct: #D4EDDA;
+  --color-wrong: #F8D7DA;
+  --timer-bg: #E9ECEF;
+  font-size: 18px;
+}
+/* 🟡 전체 화면 박스 폭 2배 확장 (840px) */
+section {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 2.5em 1em;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 14px 4px #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+}
+
+#title-page h1, #title-page p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.status-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.timer-wrap {
+  flex: 1;
+  background: var(--timer-bg);
+  border-radius: 14px;
+  height: 16px;
+  margin-left: 1em;
+  overflow: hidden;
+  position: relative;
+}
+.timer-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #82cca3, #b1e6b2);
+  transition: width 0.2s;
+}
+#question-text {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 2em 0 1em 0;
+  text-align: center;
+}
+
+.ox-btns {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin: 1.7em 0 2em 0;
+}
+.ox-btn {
+  width: 120px;
+  height: 80px;
+  border-radius: 20px;
+  border: none;
+  font-size: 2.4em;
+  color: #fff;
+  background: #aaa;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 10px #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.o-btn { background: var(--color-o);}
+.x-btn { background: var(--color-x);}
+.ox-btn:active, .ox-btn:hover { transform: scale(1.07);}
+.ox-btn.selected {
+  outline: 3px solid #3332;
+  background: linear-gradient(90deg, #ebf2ff, #ace3ff 60%);
+  color: #007BFF;
+  font-weight: bold;
+  border: 2px solid #007BFF;
+}
+
+/* 🟡 피드백(설명) 폰트 0.7배 축소 */
+#answer-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em 0;
+  padding: 1em 1em;
+  border-radius: 14px;
+  min-height: 75px;
+  font-size: 0.7em;   /* 여기만 축소! */
+}
+.feedback-correct {
+  background: var(--color-correct);
+  color: #257857;
+  border: 1.5px solid #94c9a6;
+}
+.feedback-wrong {
+  background: var(--color-wrong);
+  color: #b32131;
+  border: 1.5px solid #e5989d;
+}
+
+button {
+  background: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 1em 2.3em;
+  font-size: 1.08em;
+  margin: 1.3em 0 0 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.15s;
+}
+button:active, button:hover { background: #005bcc; }
+#next-btn, #retry-btn, #to-submit-info-btn, #submit-info-btn {
+  margin-top: 1.4em;
+  font-size: 1.1em;
+}
+#score-summary {
+  font-size: 1.3em;
+  margin: 1.1em 0 0.7em 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+#score-msg {
+  color: #27ae60;
+}
+
+/* 응답자 정보 폼 */
+#info-form {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#info-form label {
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  display: block;
+}
+#info-form input, #info-form select, #info-form textarea {
+  font-family: 'Noto Sans KR', Arial, sans-serif;
+  width: 100%;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 0.6em;
+  box-sizing: border-box;
+  margin-top: 0.3em;
+}
+#info-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+#submit-success {
+  color: #257857;
+  font-weight: bold;
+  margin-top: 1.2em;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+  section {
+    max-width: 99vw;
+    padding: 1.1em 2vw;
+  }
+  #info-form, #info-form input, #info-form textarea, #info-form select { max-width: 98vw;}
+}
+@media (max-width: 480px) {
+  .ox-btn { width: 34vw; max-width:110px; height: 50px; font-size: 1.25em;}
+  #question-text { font-size: 1em;}
+}
