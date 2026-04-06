@@ -86,10 +86,9 @@ section {
 #answer-feedback {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin-top: 3em;      /* 위 여백 더 넓게! */
   margin-bottom: 3em;   /* 아래 여백 더 넓게! */
-  margin-left: 1em;
+  margin-left: 3em;
   margin-right: auto;
   padding: 1em 1em;
   border-radius: 14px;
@@ -97,7 +96,6 @@ section {
   font-size: 0.7em;
   width: 900px;               /* ← 가로 길이 고정! */
   max-width: 100%;            /* ← 화면이 작을 때 자동 줄바꿈 */
-  text-align: left;           /* ← 왼쪽 정렬 */
 }
 .feedback-correct {
   background: var(--color-correct);
