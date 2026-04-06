@@ -112,7 +112,7 @@ $('#start-btn').onclick = () => {
 function renderQuiz() {
   const q = quizData[state.current];
   $('#question-number').innerText = `${state.current + 1}/${quizData.length}`;
-  $('#question-text').innerText = q.question;
+  $('#question-text').innerhtml = q.question;
   $('#answer-feedback').style.display = 'none';
   $('#next-btn').style.display = 'none';
   $$('.ox-btn').forEach(btn => {
