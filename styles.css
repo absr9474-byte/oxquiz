@@ -86,8 +86,11 @@ section {
 #answer-feedback {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 2em 0;
+  align-items: flex-start;
+  margin-top: 3em;      /* 위 여백 더 넓게! */
+  margin-bottom: 3em;   /* 아래 여백 더 넓게! */
+  margin-left: 1em;
+  margin-right: auto;
   padding: 1em 1em;
   border-radius: 14px;
   min-height: 75px;
