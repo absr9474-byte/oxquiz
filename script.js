@@ -120,6 +120,13 @@ function renderQuiz() {
     btn.classList.remove('selected');
   });
   resetTimer();
+    // 버튼 텍스트 결정
+  if (state.current === quizData.length - 1) {
+    $('#next-btn').innerText = '결과 확인하기';
+  } else {
+    $('#next-btn').innerText = '다음 문제';
+  }
+}
 }
 
 $$('.ox-btn').forEach(btn => {
