@@ -116,6 +116,7 @@ section {
   line-height: 1.4;
   display: block;
   margin-top: 0.3em;
+  margin-left: 0;         /* 왼쪽? */
   font-weight: normal;
   text-align: left;   
 }
