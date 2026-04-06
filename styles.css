@@ -87,10 +87,6 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;              /* 박스를 중앙정렬 */
-  margin-top: 6em;      /* 위 여백 더 넓게! */
-  margin-bottom: 6em;   /* 아래 여백 더 넓게! */
-  margin-left: 3em;
-  margin-right: auto;
   padding: 1em 1em;
   border-radius: 14px;
   min-height: 75px;
