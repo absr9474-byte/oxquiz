@@ -259,7 +259,7 @@ $('#info-form').onsubmit = async function(e){
   } catch(e) {
     alert("서버 오류! 다시 시도해 주세요.");
     $('#submit-info-btn').disabled = false;
-    $('#submit-info-btn').innerText = "제출";
+    $('#submit-info-btn').innerHTML = "제출";
   }
 };
 
