@@ -175,7 +175,7 @@ function showResult() {
     msg = "😊 아쉽네요! <br>퀴즈를 다시 한번 풀어보며 우리 회사의 고객가치혁신 활동을 알아볼까요?";
     $('#score-msg').style.color = "#dc3545";
   }
-  $('#score-msg').innerText = msg;
+  $('#score-msg').innerHTML = msg;
 }
 
 // 결과→ 응답자 입력폼
@@ -259,7 +259,7 @@ $('#info-form').onsubmit = async function(e){
   } catch(e) {
     alert("서버 오류! 다시 시도해 주세요.");
     $('#submit-info-btn').disabled = false;
-    $('#submit-info-btn').innerHTML = "제출";
+    $('#submit-info-btn').innerText = "제출";
   }
 };
 
