@@ -103,6 +103,18 @@ section {
   color: #b32131;
   border: 1.5px solid #e5989d;
 }
+.feedback-head {
+  font-size: 1.7em;
+  font-weight: bold;
+  margin-bottom: 0.25em;
+  line-height: 1.3;
+}
+.feedback-explanation {
+  font-size: 2em;
+  line-height: 1.4;
+  display: block;
+  margin-top: 0.3em;
+  font-weight: normal;
 button {
   background: #007BFF;
   color: #fff;
