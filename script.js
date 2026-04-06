@@ -136,9 +136,9 @@ function handleAnswer(userAns, btnEl) {
   state.userAnswers[state.current] = userAns;
   if (isCorrect) state.score++;
   const fb = $('#answer-feedback');
-  fb.innerHTML = isCorrect
-    ? `정답입니다! <br><span style="font-weight:bold">${q.explanation}</span>`
-    : `오답입니다! <br><span style="color:#b32131; font-weight:bold">${q.explanation}</span>`;
+ fb.innerHTML = isCorrect
+  ? `<span class="feedback-head">정답입니다!</span><span class="feedback-explanation">${q.explanation}</span>`
+  : `<span class="feedback-head" style="color:#b32131;">오답입니다!</span><span class="feedback-explanation">${q.explanation}</span>`;
   fb.className = isCorrect ? 'feedback-correct' : 'feedback-wrong';
   fb.style.display = 'flex';
   $('#next-btn').style.display = 'block';
@@ -162,10 +162,10 @@ function showResult() {
   const percent = (state.score / quizData.length) * 100;
   let msg;
   if (percent >= 80) {
-    msg = "👏 잘했습니다! 고객가치에 대해 훌륭하게 이해하고 계시네요.";
+    msg = "👏 잘했습니다! 우리 회사의 고객가치혁신 활동에 대해 훌륭하게 이해하고 계시네요.";
     $('#score-msg').style.color = "#27ae60";
   } else {
-    msg = "😊 조금만 더! 고객가치 혁신을 위한 추가학습을 추천합니다.";
+    msg = "😊 아쉽네요! 퀴즈를 다시 한번 풀어보며 우리 회사의 고객가치혁신 활동을 알아볼까요?";
     $('#score-msg').style.color = "#dc3545";
   }
   $('#score-msg').innerText = msg;
