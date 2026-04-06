@@ -91,7 +91,7 @@ section {
   border-radius: 14px;
   min-height: 75px;
   font-size: 0.7em;
-  width: 900px;               /* ← 가로 길이 고정! */
+  width: 800px;               /* ← 가로 길이 고정! */
   max-width: 100%;            /* ← 화면이 작을 때 자동 줄바꿈 */
 }
 .feedback-correct {
