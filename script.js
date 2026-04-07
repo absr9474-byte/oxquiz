@@ -152,35 +152,31 @@ function handleAnswer(userAns, btnEl) {
   const nextBtn = $('#next-btn');
   nextBtn.disabled = true;                  // 비활성화(회색)
   nextBtn.style.display = 'block';
-  // 파란색은 button 기본 설정에 따라 자동 적용됨
+  nextBtn.style.background = "#b0b0b0";
+  nextBtn.style.borderColor = "#b0b0b0";
 
-    // 그라데이션 효과를 위한 애니메이션
-  let timer = 0;
-  const duration = 7000;   // 총 7초
-  let interval = 50;       // 그라데이션 간격(ms)
+  // 타이머 그라데이션 (left→right)
+  let duration = 7000;    // 7초
+  let interval = 40;      // ms
+  let steps = Math.floor(duration / interval);
   let step = 0;
-  const steps = Math.floor(duration / interval);
 
-  function lerpColor(a, b, t) {
-    // a, b: hex 예시 "#b0b0b0", "#007BFF"
-    // t: 0~1
-    const parse = hex => hex.match(/\w\w/g).map(x=>parseInt(x,16));
-    const [r1,g1,b1] = parse(a), [r2,g2,b2] = parse(b);
-    return `rgb(${Math.round(r1+(r2-r1)*t)},${Math.round(g1+(g2-g1)*t)},${Math.round(b1+(b2-b1)*t)})`;
-  }
-  // 초기색 회색 → 최종 색 파란색
   const startColor = "#b0b0b0";
   const endColor = "#007BFF";
 
-  // 매 50ms마다 색상을 변화
+  function lerpGradient(t) {
+    // t: 0~1, left 만큼 파란색 진행
+    return `linear-gradient(90deg, ${endColor} 0%, ${endColor} ${t*100}%, ${startColor} ${t*100}%, ${startColor} 100%)`;
+  }
+
+  // 그라데이션 애니메이션
   const gradInterval = setInterval(() => {
     step++;
     const t = step / steps;
-    nextBtn.style.background = lerpColor(startColor, endColor, t);
-    nextBtn.style.borderColor = lerpColor(startColor, endColor, t);
-    nextBtn.style.color = "#fff";
-    // 마지막 단계에서 활성화
-    if(t >= 1) {
+    nextBtn.style.background = lerpGradient(t);
+    nextBtn.style.borderColor = t < 1 ? "#b0b0b0" : endColor;
+
+    if (t >= 1) {
       nextBtn.disabled = false;
       nextBtn.style.background = endColor;
       nextBtn.style.borderColor = endColor;
