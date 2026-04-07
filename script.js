@@ -147,14 +147,6 @@ function handleAnswer(userAns, btnEl) {
   : `<span class="feedback-head" style="color:#b32131;">오답입니다!</span><span class="feedback-explanation">${q.explanation}</span>`;
   fb.className = isCorrect ? 'feedback-correct' : 'feedback-wrong';
   fb.style.display = 'flex';
-
- // O/X 초록 그라데이션 효과
-  if (btnEl) {
-    // 초록색 그라데이션(좌→우)
-    btnEl.style.background = "linear-gradient(90deg, #63e69a 0%, #63e69a 70%, #c8f7d5 100%)";
-    btnEl.style.borderColor = "#63e69a";
-    btnEl.style.color = "#138754"; // 초록계열
-  }
   
   // ----- 다음 버튼 비활성화 후 7초 뒤 활성화 -----
   const nextBtn = $('#next-btn');
