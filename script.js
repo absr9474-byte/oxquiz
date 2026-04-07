@@ -147,7 +147,18 @@ function handleAnswer(userAns, btnEl) {
   : `<span class="feedback-head" style="color:#b32131;">오답입니다!</span><span class="feedback-explanation">${q.explanation}</span>`;
   fb.className = isCorrect ? 'feedback-correct' : 'feedback-wrong';
   fb.style.display = 'flex';
-  $('#next-btn').style.display = 'block';
+  
+  // ----- 다음 버튼 비활성화 후 7초 뒤 활성화 -----
+  const nextBtn = $('#next-btn');
+  nextBtn.disabled = true;                  // 비활성화(회색)
+  nextBtn.style.display = 'block';
+  // 파란색은 button 기본 설정에 따라 자동 적용됨
+
+  // 7초 후 활성화 (파란색)
+  setTimeout(() => {
+    nextBtn.disabled = false;
+  }, 7000);
+  
   stopTimer();
 }
 
