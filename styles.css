@@ -133,10 +133,10 @@ button {
   transition: background 0.15s;
 }
 #next-btn:disabled {
-  background: #b0b0b0 !important;
-  color: #fff !important;
-  cursor: default !important;
-  border-color: #b0b0b0 !important;
+  background: #b0b0b0 ;
+  color: #fff ;
+  cursor: default ;
+  border-color: #b0b0b0 ;
   box-shadow: none;
   opacity: 0.8;
 }
