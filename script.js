@@ -260,13 +260,11 @@ $('#info-form').onsubmit = async function(e){
   const group2Elem = $('#group2');
   const group2 = group2Elem.disabled ? '' : group2Elem.value;
   const username = $('#username').value.trim();
-  const number = $('#number').value.trim();
   const subjective = $('#subjective').value.trim();
 
   if(group1 === "") { alert("부문을 선택해 주세요!"); return; }
   if(!group2Elem.disabled && group2 === "") { alert("사업부를 선택해 주세요!"); return; }
   if(!username) { alert("이름을 입력해 주세요!"); return; }
-  if(!/^[0-9]{10,11}$/.test(number)) { alert("전화번호를 올바르게 입력해 주세요! (예: 01012345678)"); return; }
   if(!subjective) { alert("고객가치 실행사례를 입력해 주세요!"); return; }
 
   $('#submit-info-btn').disabled = true;
@@ -277,7 +275,6 @@ $('#info-form').onsubmit = async function(e){
         group1, 
         group2,
         username,
-        number,
         score: state.score,
         subjective
       }
