@@ -132,6 +132,14 @@ button {
   font-weight: bold;
   transition: background 0.15s;
 }
+button:disabled, #next-btn:disabled {
+  background: #b0b0b0 !important;
+  color: #fff !important;
+  cursor: default !important;
+  border-color: #b0b0b0 !important;
+  box-shadow: none;
+  opacity: 0.8;
+}
 button:active, button:hover { background: #005bcc; }
 #next-btn, #retry-btn, #to-submit-info-btn, #submit-info-btn {
   margin-top: 1.4em;
