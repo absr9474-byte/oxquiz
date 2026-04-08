@@ -7,9 +7,9 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const quizData = [
   {
     id: 1,
-    question: "우리회사는 업무 목표를 세울 때, 단순한 성과 달성뿐 아니라<br>고객에게 어떤 경험과 가치를 제공하는지까지 연결해 고민하고 있다.",
+    question: "우리 회사는 업무 목표를 세울 때, 단순한 성과 달성뿐 아니라<br>고객에게 어떤 경험과 가치를 제공하는지까지 연결해 고민하고 있다.",
     correctAnswer: "O",
-    explanation: "우리 회사는 매년 경영진이 제시하는 고객가치 지향점이 <br>각 부서와 개인 성과목표에 자연스럽게 녹아들 수 있도록, <br><b>고객가치혁신 목표를 각 사업부 및 팀 단위까지 연계하여 수립</b>하고 있습니다."
+    explanation: "매년 경영진이 제시하는 고객가치 지향점이 <br>각 부서와 개인 성과목표에 자연스럽게 녹아들 수 있도록, <br><b>고객가치혁신 목표를 각 사업부 및 팀 단위까지 연계하여 수립</b>하고 있습니다."
   },
   {
     id: 2,
