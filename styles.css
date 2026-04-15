@@ -196,6 +196,15 @@ button:active, button:hover { background: #005bcc; }
   min-height: 80px;
   resize: vertical;
 }
+.example-guide {
+  color: #888;
+  font-size: 0.80em;
+  display: block;
+  margin-top: 0.25em;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+  font-weight: normal;
+}
 #submit-success {
   color: #257857;
   font-weight: bold;
