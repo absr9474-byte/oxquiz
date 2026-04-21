@@ -31,9 +31,9 @@ const quizData = [
   },
   {
     id: 5,
-    question: "고객 문제 해결에 활용할 수 있는 우리만의 AI Tool을 <br>자율적으로 활용하고 서로 공유하며 AI활용 역량을 강화하고 있습니다.",
+    question: "고객 문제 해결에 활용할 수 있는 AI Tool을 <br>자율적으로 사용하고 서로 공유하면서 AI활용 역량을 강화하고 있습니다.",
     correctAnswer: "O",
-    explanation: "고객 데이터를 활용하여 신속하고 정교한 솔루션을 도출할 수 있는 <b>Brand Agent</b>와<br><b>Survey Agent</b>, 업무효율을 극대화하는 <b>Deep Agent Builder</b> 등 우리만의<br>AI Tool이 마련되어 있습니다. 더불어 구성원이 AI Tool을 잘 활용할 수 있도록<br>워크샵과 교육 프로그램도 병행하고 있습니다."
+    explanation: "고객 데이터를 활용하여 신속하고 정교한 솔루션을 도출할 수 있도록 <b>다양한 AI Tool 활용</b>을 위한<br>보안 정책을 수립하고, <b>사업부별 AI전산사용료를 지원</b>하고 있습니다. 또한 구성원이 HSAD의 Deep Agent Builder를 업무에 적극적으로 활용할 수 있도록 <b>워크숍과 교육 프로그램</b>을 운영하고 있습니다."
   },
   {
     id: 6,
